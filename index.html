@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en" ng-app="todolist">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>提醒事项</title>
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/angular.js"></script>
+	<script src="js/angular-animate.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+    <div class="box">
+    	<div class="list">
+			<div class="list_head">
+				<span>iCloud</span>
+				<span class="tix">提醒事项</span>
+				<div class="jiantou"></div>
+				<div class="add" ng-click="addqingdan()"></div>
+			</div>
+			<ul>
+				<li class="plan">
+					<div class="pic biao"></div>
+					<span>已计划</span>
+				</li>
+				<li class="lis" ng-repeat="v in qingdan " ng-click="setCurrent($index)" ng-class="{'active':v===currentQingdan}">
+					<div class="colors" ng-class="v.pic"></div>
+					<input type="text" class="info" value="{{v.name}}" ng-model="v.name"> 
+					<div class="wif"></div>
+					<div class="line"></div>
+				</li>
+			</ul>
+		</div>
+		<div class="content">
+			<div class="search">
+				<div class="search_img"></div>
+				<input type="text" class="search_info"placeholder="搜索所有提醒" >
+			</div>
+			<div class="select">
+				<span class="{{currentQingdan.theme}}">{{currentQingdan.name}}{{v.name}}</span>
+				<input type="checkbox" id="xuanze">
+				<label for="xuanze" class="xuan {{currentQingdan.theme}}">选项
+                    <div class="selectshow">
+                    	<div class="kuang"></div>
+                    	<div class="zheng"></div>
+                    	<input type="text" ng-model="currentQingdan.name" class="{{currentQingdan.theme}}">
+                    	<span class="liebiao">列表颜色</span>
+				          <ul >
+							<li class="lan"></li>
+							<li class="huang"></li>
+							<li class="lv"></li>
+							<li class="cheng"></li>
+							<li class="fen"></li>
+							<li class="zise"></li>
+							<li class="zongse"></li>
+						</ul>
+						<div class="button">
+							<span id="del">删除</span>
+							<span id="back">取消</span>
+							<span id="shu"></span>
+							<span id="fin">完成</span>
+						</div>
+                    </div>
+
+				</label>
+			</div>
+			<ul class="new">
+				<li class="over">
+					<div class="sanjiao"></div>
+					<span class="wan" ng-repeat="v in (currentQingdan.shixiang)">已完成:{{(v.state=='true').length}}项</span>
+					<span class="clear {{currentQingdan.theme}}" ng-click="delete(k)">清除已完成事项</span>
+				</li>
+				<li class="time">
+					<span>2016年6月4日 星期六</span>
+				</li>
+				<div ng-show="v.state" ng-repeat="v in currentQingdan.shixiang">
+				<li class="newxiangmu">
+					<div class="new_img {{currentQingdan.da}}"  ng-click="v.state=!v.state"></div>
+					<input type="text" value="{{v.name}}">
+				</li>
+				</div>
+				<li class="over">
+				<span class="wan">未完成</span></li>
+				<div ng-show="!v.state" ng-repeat="v in currentQingdan.shixiang">
+				<li class="newxiangmu">
+				    <div class="line"></div>
+					<div class="new_img {{currentQingdan.shi}}"  ng-click="v.state=!v.state"></div>
+					<input type="text" value="{{v.name}}">
+				</li>
+				</div>
+				<li class="newxiangmu2" ng-click="addxiangmu()">
+					<span class="wan">新项目</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
